@@ -1,24 +1,20 @@
-pub fn convert(s: &str) -> String {
+pub fn convert<T: AsRef<str>>(s: T) -> String {
     let mut result = String::new();
 
-    let mut chars = s.chars();
+    let mut chars = s.as_ref().chars();
+    let init = chars.next().unwrap();
 
-    let mut last = chars.next().unwrap();
-    let mut counter = 1;
-    while let Some(c) = chars.next() {
+    let (last, counter) = chars.fold((init,1), |(last, counter), c| {
         if last == c {
-            counter += 1
+            (last, counter + 1)
         } else {
             result += &format!("{}{}", counter, last);
-            last = c;
-            counter = 1
+            (c,1)
         }
-    }
-    result += &format!("{}{}", counter, last);
 
-    result
+    });
+    result + &format!("{}{}", counter, last)
 }
-
 
 #[cfg(test)]
 mod tests {
