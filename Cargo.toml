@@ -1,0 +1,18 @@
+[package]
+name = "rusthero_rustlab2019"
+version = "0.1.0"
+authors = ["Andrea Tomasi <andrea.tomasi@argo.vision>"]
+edition = "2018"
+
+
+[[bin]]
+name = "main_app"
+path = "src/main.rs"
+
+[lib]
+name = "rusthero_rustlab2019"
+path = "src/lib.rs"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
