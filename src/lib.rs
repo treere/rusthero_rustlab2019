@@ -1,19 +1,16 @@
 pub fn convert<T: AsRef<str>>(s: T) -> String {
-    let mut result = String::new();
-
     let mut chars = s.as_ref().chars();
     let init = chars.next().unwrap();
 
-    let (last, counter) = chars.fold((init,1), |(last, counter), c| {
+    let (res, l, c) = chars.fold((String::new(), init, 1), |(s, last, counter), c| {
         if last == c {
-            (last, counter + 1)
+            (s, c, counter + 1)
         } else {
-            result += &format!("{}{}", counter, last);
-            (c,1)
+            let x = format!("{}{}", counter, last);
+            (s + &x, c, 1)
         }
-
     });
-    result + &format!("{}{}", counter, last)
+    res + &format!("{}{}", c, l)
 }
 
 #[cfg(test)]
@@ -49,5 +46,4 @@ mod tests {
     fn f6() {
         assert_eq!(convert("111223"), "312213".to_owned())
     }
-
 }
