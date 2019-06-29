@@ -5,5 +5,5 @@ fn main() {
     for _ in 0..40 {
         s = convert(s);
     }
-    println!("{}",s);
+    println!("{}",s.len());
 }
